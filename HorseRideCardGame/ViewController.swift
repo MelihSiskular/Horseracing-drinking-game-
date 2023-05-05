@@ -47,12 +47,31 @@ class ViewController: UIViewController {
     var cardSide5 = UIImageView()
     var cardSide6 = UIImageView()
     
+    var sideIsFaceUp1 = false
+    var sideIsFaceUp2 = false
+    var sideIsFaceUp3 = false
+    var sideIsFaceUp4 = false
+    var sideIsFaceUp5 = false
+    var sideIsFaceUp6 = false
+    
+    var supportSideIsFaceUp1 = false
+    var supportSideIsFaceUp2 = false
+    var supportSideIsFaceUp3 = false
+    var supportSideIsFaceUp4 = false
+    var supportSideIsFaceUp5 = false
+    var supportSideIsFaceUp6 = false
+    
     var randomCardSide1 = ""
     var randomCardSide2 = ""
     var randomCardSide3 = ""
     var randomCardSide4 = ""
     var randomCardSide5 = ""
     var randomCardSide6 = ""
+    
+    var raceOrdering1 = ""
+    var raceOrdering2 = ""
+    var raceOrdering3 = ""
+    var raceOrdering4 = ""
     
     var startButton = UIButton()
     
@@ -78,11 +97,8 @@ class ViewController: UIViewController {
         width = view.frame.size.width
         height = view.frame.size.height
        
-  
-        startButton.layer.cornerRadius = 8
-        startButton.backgroundColor = .white
-        startButton.setTitle("Yarışa Başla!", for: UIControl.State.normal)
-        startButton.setTitleColor(.blue, for: UIControl.State.normal)
+       
+     
         
         randomSelectedCard.isUserInteractionEnabled = true
         let gestureForRandomCard = UISwipeGestureRecognizer(target: self, action: #selector(swipeRandomCard))
@@ -91,6 +107,9 @@ class ViewController: UIViewController {
         
         
         appendCardstoDeckArray()
+        for _ in 1...5 {
+            deste.shuffle()
+        }
         startingImageFunc()
         frameArrangmentFunc()
         viewAddSubviewFunc()
@@ -103,49 +122,139 @@ class ViewController: UIViewController {
   
     
                                                           //MARK: Functions
+    
+    func decrasePointIfNeccesary() {
+        
+        if sideIsFaceUp1 && supportSideIsFaceUp1 == false {
+            print("AZALT")
+            controlSide1()
+            supportSideIsFaceUp1 = true
+        }
+        if sideIsFaceUp2 && supportSideIsFaceUp2 == false {
+            print("AZALT")
+            controlSide2()
+            supportSideIsFaceUp2 = true
+        }
+        if sideIsFaceUp3 && supportSideIsFaceUp3 == false {
+            print("AZALT")
+            controlSide3()
+            supportSideIsFaceUp3 = true
+        }
+        if sideIsFaceUp4 && supportSideIsFaceUp4 == false {
+            print("AZALT")
+            controlSide4()
+            supportSideIsFaceUp4 = true
+        }
+        if sideIsFaceUp5 && supportSideIsFaceUp5 == false {
+            print("AZALT")
+            controlSide5()
+            supportSideIsFaceUp5 = true
+        }
+        if sideIsFaceUp6 && supportSideIsFaceUp6 == false {
+            print("AZALT")
+            controlSide6()
+            supportSideIsFaceUp6 = true
+        }
+        whereIsTheCards()
+    }
+    
+    
+    func controlOfBooleanValues() {
+        
+        if sideIsFaceUp1 {
+            
+            print("1 açıldı")
+            cardSide1.image = UIImage(named: randomCardSide1)
+            decrasePointIfNeccesary()
+           
+        }
+        if sideIsFaceUp2 {
+            
+            print("2 açıldı")
+            cardSide2.image = UIImage(named: randomCardSide2)
+            decrasePointIfNeccesary()
+          
+        }
+        if sideIsFaceUp3 {
+            
+            print("3 açıldı")
+            cardSide3.image = UIImage(named: randomCardSide3)
+            decrasePointIfNeccesary()
+            
+        }
+        if sideIsFaceUp4 {
+            
+            print("4 açıldı")
+            cardSide4.image = UIImage(named: randomCardSide4)
+            decrasePointIfNeccesary()
+         
+        }
+        if sideIsFaceUp5 {
+            
+            print("5 açıldı")
+            cardSide5.image = UIImage(named: randomCardSide5)
+            decrasePointIfNeccesary()
+           
+        }
+        if sideIsFaceUp6 {
+            
+            print("6 açıldı")
+            cardSide6.image = UIImage(named: randomCardSide6)
+            decrasePointIfNeccesary()
+            
+        }
+        
+    }
+    
 
     
     func controlOfSideCards() {
         
         if pointOfClub >= 1 && pointOfHeart >= 1 && pointOfSpades >= 1 && pointOfDiamonds >= 1 {
-            cardSide1.image = UIImage(named: randomCardSide1)
-            controlSide1()
             
-            if pointOfClub >= 2 && pointOfHeart >= 2 && pointOfSpades >= 2 && pointOfDiamonds >= 2 {
-                cardSide2.image = UIImage(named: randomCardSide2)
-                controlSide2()
-                
-                
-                if pointOfClub >= 3 && pointOfHeart >= 3 && pointOfSpades >= 3 && pointOfDiamonds >= 3 {
-                    cardSide3.image = UIImage(named: randomCardSide3)
-                    controlSide3()
-                    
-                    
-                    if pointOfClub >= 4 && pointOfHeart >= 4 && pointOfSpades >= 4 && pointOfDiamonds >= 4 {
-                        cardSide4.image = UIImage(named: randomCardSide4)
-                        controlSide4()
-                        
-                        
-                        if pointOfClub >= 5 && pointOfHeart >= 5 && pointOfSpades >= 5 && pointOfDiamonds >= 5 {
-                            cardSide5.image = UIImage(named: randomCardSide5)
-                            controlSide5()
-                            
-                            
-                            if pointOfClub >= 6 && pointOfHeart >= 6 && pointOfSpades >= 6 && pointOfDiamonds >= 6 {
-                                cardSide6.image = UIImage(named: randomCardSide6)
-                                controlSide6()
-                            }
-                        }
-                    }
-                }
-            }
+            cardSide1.image = UIImage(named: randomCardSide1)
+            sideIsFaceUp1 = true
+            
         }
+        if pointOfClub >= 2 && pointOfHeart >= 2 && pointOfSpades >= 2 && pointOfDiamonds >= 2 {
+            
+            cardSide2.image = UIImage(named: randomCardSide2)
+            sideIsFaceUp2 = true
+        }
+        if pointOfClub >= 3 && pointOfHeart >= 3 && pointOfSpades >= 3 && pointOfDiamonds >= 3 {
+            
+            cardSide3.image = UIImage(named: randomCardSide3)
+            sideIsFaceUp3 = true
+        }
+        if pointOfClub >= 4 && pointOfHeart >= 4 && pointOfSpades >= 4 && pointOfDiamonds >= 4 {
+            
+            cardSide4.image = UIImage(named: randomCardSide4)
+            sideIsFaceUp4 = true
+        }
+        if pointOfClub >= 5 && pointOfHeart >= 5 && pointOfSpades >= 5 && pointOfDiamonds >= 5 {
+            
+            cardSide5.image = UIImage(named: randomCardSide5)
+            sideIsFaceUp5 = true
+        }
+        if pointOfClub >= 6 && pointOfHeart >= 6 && pointOfSpades >= 6 && pointOfDiamonds >= 6 {
+            
+            cardSide6.image = UIImage(named: randomCardSide6)
+            sideIsFaceUp6 = true
+        }
+        
+        controlOfBooleanValues()
+        
+        
     }
     
     
     
     func whereIsTheCards() {
         switch pointOfClub {
+        case 0:
+            horseClub.image = UIImage(named: "Sinek As")
+            horseClub1.image = UIImage()
+            horseClub2.image = UIImage()
         case 1:
             horseClub1.image = UIImage(named: "Sinek As")
             horseClub.image = UIImage()
@@ -186,6 +295,10 @@ class ViewController: UIViewController {
         
         
         switch pointOfSpades {
+        case 0:
+            horseSpades.image = UIImage(named: "Maça As")
+            horseSpades1.image = UIImage()
+            horseSpades2.image = UIImage()
         case 1:
             horseSpades1.image = UIImage(named: "Maça As")
             horseSpades.image = UIImage()
@@ -205,7 +318,7 @@ class ViewController: UIViewController {
             horseSpades5.image = UIImage()
         case 4:
             horseSpades4.image = UIImage(named: "Maça As")
-            horseSpades.image = UIImage()
+            horseSpades2.image = UIImage()
             horseSpades3.image = UIImage()
             horseSpades5.image = UIImage()
             horseSpades6.image = UIImage()
@@ -224,6 +337,10 @@ class ViewController: UIViewController {
         
         
         switch pointOfHeart {
+        case 0:
+            horseHeart.image = UIImage(named: "Kupa As")
+            horseHeart1.image = UIImage()
+            horseHeart2.image = UIImage()
         case 1:
             horseHeart1.image = UIImage(named: "Kupa As")
             horseHeart.image = UIImage()
@@ -262,6 +379,10 @@ class ViewController: UIViewController {
         
         
         switch pointOfDiamonds {
+        case 0:
+            horseDiamonds.image = UIImage(named: "Karo As")
+            horseDiamonds1.image = UIImage()
+            horseDiamonds2.image = UIImage()
         case 1:
             horseDiamonds1.image = UIImage(named: "Karo As")
             horseDiamonds.image = UIImage()
@@ -299,25 +420,119 @@ class ViewController: UIViewController {
         }
     }
     
-    func whoIstheWinner() {
-        if winningPoint == pointOfClub {
-            print("Oyun biter")
-        }else if winningPoint == pointOfHeart {
-            print("Oyun biter")
-        }else if winningPoint == pointOfSpades {
-            print("Oyun biter")
-        }else if winningPoint == pointOfDiamonds {
-            print("Oyun biter")
+    func whoIsTheWinner() {
+        
+        if raceOrdering1 == "Sinek As" {
+            pointOfClub = 100
+            horseClub6.image = UIImage(named: "1")
+        }else if raceOrdering1 == "Maça As" {
+            pointOfSpades = 100
+            horseSpades6.image = UIImage(named: "1")
+        }else if raceOrdering1 == "Karo As" {
+            pointOfDiamonds = 100
+            horseDiamonds6.image = UIImage(named: "1")
+        }else if raceOrdering1 == "Kupa As" {
+            pointOfHeart = 100
+            horseHeart6.image = UIImage(named: "1")
         }
+        
+        if raceOrdering2 == "Sinek As" {
+            pointOfClub = 100
+            horseClub6.image = UIImage(named: "2")
+        }else if raceOrdering2 == "Maça As" {
+            pointOfSpades = 100
+            horseSpades6.image = UIImage(named: "2")
+        }else if raceOrdering2 == "Karo As" {
+            pointOfDiamonds = 100
+            horseDiamonds6.image = UIImage(named: "2")
+        }else if raceOrdering2 == "Kupa As" {
+            pointOfHeart = 100
+            horseHeart6.image = UIImage(named: "2")
+        }
+        
+        if raceOrdering3 == "Sinek As" {
+            pointOfClub = 100
+            horseClub6.image = UIImage(named: "3")
+        }else if raceOrdering3 == "Maça As" {
+            pointOfSpades = 100
+            horseSpades6.image = UIImage(named: "3")
+        }else if raceOrdering3 == "Karo As" {
+            pointOfDiamonds = 100
+            horseDiamonds6.image = UIImage(named: "3")
+        }else if raceOrdering3 == "Kupa As" {
+            pointOfHeart = 100
+            horseHeart6.image = UIImage(named: "3")
+        }
+        
+        if raceOrdering4 == "Sinek As" {
+            pointOfClub = 100
+            horseClub6.image = UIImage(named: "4")
+        }else if raceOrdering4 == "Maça As" {
+            pointOfSpades = 100
+            horseSpades6.image = UIImage(named: "4")
+        }else if raceOrdering4 == "Karo As" {
+            pointOfDiamonds = 100
+            horseDiamonds6.image = UIImage(named: "4")
+        }else if raceOrdering4 == "Kupa As" {
+            pointOfHeart = 100
+            horseHeart6.image = UIImage(named: "4")
+        }
+        
+    }
+    
+    func whoIstheFinishRace() {
+        if winningPoint == pointOfClub {
+            if raceOrdering1 == "" {
+                raceOrdering1 = "Sinek As"
+            }else if raceOrdering2 == "" {
+                raceOrdering2 = "Sinek As"
+            }else if raceOrdering3 == "" {
+                raceOrdering3 = "Sinek As"
+            }else if raceOrdering4 == "" {
+                raceOrdering4 = "Sinek As"
+            }
+        }
+        if winningPoint == pointOfHeart {
+            if raceOrdering1 == "" {
+                raceOrdering1 = "Kupa As"
+            }else if raceOrdering2 ==  "" {
+                raceOrdering2 = "Kupa As"
+            }else if raceOrdering3 ==  "" {
+                raceOrdering3 = "Kupa As"
+            }else if raceOrdering4 ==  "" {
+                raceOrdering4 = "Kupa As"
+            }
+        }
+        if winningPoint == pointOfSpades {
+            if raceOrdering1 == "" {
+                raceOrdering1 = "Maça As"
+            }else if raceOrdering2 ==  "" {
+                raceOrdering2 = "Maça As"
+            }else if raceOrdering3 == "" {
+                raceOrdering3 = "Maça As"
+            }else if raceOrdering4 ==  "" {
+                raceOrdering4 = "Maça As"
+            }
+        }
+        if winningPoint == pointOfDiamonds {
+            if raceOrdering1 ==  "" {
+                raceOrdering1 = "Karo As"
+            }else if raceOrdering2 ==  "" {
+                raceOrdering2 = "Karo As"
+            }else if raceOrdering3 ==  "" {
+                raceOrdering3 = "Karo As"
+            }else if raceOrdering4 ==  "" {
+                raceOrdering4 = "Karo As"
+            }
+        }
+        whoIsTheWinner()
     }
     
     @objc
     func swipeRandomCard() {
         ///Desteden 4 as oyun için çıktı, 6 tane kart yan taraf için çıktı
         ///Artık deste karıştırılıp en sondan çekişler yapabiliriz
-        for _ in 1...5 {
-            deste.shuffle()
-        }
+       
         var upCardFromDecks = deste.randomElement()!
         randomSelectedCard.image = UIImage(named: upCardFromDecks)
       
@@ -349,8 +564,20 @@ class ViewController: UIViewController {
         
         whereIsTheCards()
         controlOfSideCards()
-        whoIstheWinner()
+        whoIstheFinishRace()
         
+        print("Kupa :\(pointOfHeart)")
+        print("Maça :\(pointOfSpades)")
+        print("Karo :\(pointOfDiamonds)")
+        print("Sinek :\(pointOfClub)")
+        
+        print("\(sideIsFaceUp1) - \(supportSideIsFaceUp1)")
+        print("\(sideIsFaceUp2) - \(supportSideIsFaceUp2)")
+        print("\(sideIsFaceUp3) - \(supportSideIsFaceUp3)")
+        print("\(sideIsFaceUp4) - \(supportSideIsFaceUp4)")
+        print("\(sideIsFaceUp5) - \(supportSideIsFaceUp5)")
+        print("\(sideIsFaceUp6) - \(supportSideIsFaceUp6)")
+        print("\n")
     }
     
     func randomChoosed6CardsFromDecks() {
@@ -366,192 +593,223 @@ class ViewController: UIViewController {
     
     
     func controlSide1() {
-        if randomCardSide1.hasPrefix("Sinek") {
-            if randomCardSide1.hasPrefix("Sinek As") {
-               pointOfClub -= 2
-            }else {
-              pointOfClub -= 1
+        if sideIsFaceUp1 {
+            if randomCardSide1.hasPrefix("Sinek") {
+                if randomCardSide1.hasPrefix("Sinek As") {
+                   pointOfClub -= 2
+                }else {
+                  pointOfClub -= 1
+                }
+                
+                
+            }
+            if randomCardSide1.hasPrefix("Maça") {
+                if randomCardSide1.hasPrefix("Maça As") {
+                    pointOfSpades -= 2
+                }else {
+                    pointOfSpades -= 1
+                }
+               
+            }
+            if randomCardSide1.hasPrefix("Kupa") {
+                if randomCardSide1.hasPrefix("Kupa As") {
+                    pointOfHeart -= 2
+                }else {
+                    pointOfHeart -= 1
+                }
+               
+            }
+            if randomCardSide1.hasPrefix("Karo") {
+                if randomCardSide1.hasPrefix("Karo As") {
+                    pointOfDiamonds -= 2
+                }else {
+                    pointOfDiamonds -= 1
+                }
+                
             }
             
         }
-        if randomCardSide1.hasPrefix("Maça") {
-            if randomCardSide1.hasPrefix("Maça As") {
-                pointOfSpades -= 2
-            }else {
-                pointOfSpades -= 1
-            }
-        }
-        if randomCardSide1.hasPrefix("Kupa") {
-            if randomCardSide1.hasPrefix("Kupa As") {
-                pointOfHeart -= 2
-            }else {
-                pointOfHeart -= 1
-            }
-        }
-        if randomCardSide1.hasPrefix("Karo") {
-            if randomCardSide1.hasPrefix("Karo As") {
-                pointOfDiamonds -= 2
-            }else {
-                pointOfDiamonds -= 1
-            }
-        }
-        whereIsTheCards()
+     
     }
     func controlSide2() {
-        if randomCardSide2.hasPrefix("Sinek") {
-            if randomCardSide2.hasPrefix("Sinek As") {
-                pointOfClub -= 2
-            }else {
-                pointOfClub -= 1
+        
+        if sideIsFaceUp2 {
+            if randomCardSide2.hasPrefix("Sinek") {
+                if randomCardSide2.hasPrefix("Sinek As") {
+                    pointOfClub -= 2
+                }else {
+                    pointOfClub -= 1
+                }
             }
-        }
-        if randomCardSide2.hasPrefix("Maça") {
-            if randomCardSide2.hasPrefix("Maça As") {
-                pointOfSpades -= 2
-            }else {
-                pointOfSpades -= 1
+            if randomCardSide2.hasPrefix("Maça") {
+                if randomCardSide2.hasPrefix("Maça As") {
+                    pointOfSpades -= 2
+                }else {
+                    pointOfSpades -= 1
+                }
             }
-        }
-        if randomCardSide2.hasPrefix("Kupa") {
-            if randomCardSide2.hasPrefix("Kupa As") {
-                pointOfHeart -= 2
-            }else {
-                pointOfHeart -= 1
+            if randomCardSide2.hasPrefix("Kupa") {
+                if randomCardSide2.hasPrefix("Kupa As") {
+                    pointOfHeart -= 2
+                }else {
+                    pointOfHeart -= 1
+                }
             }
-        }
-        if randomCardSide2.hasPrefix("Karo") {
-            if randomCardSide2.hasPrefix("Karo As") {
-                pointOfDiamonds -= 2
-            }else {
-                pointOfDiamonds -= 1
+            if randomCardSide2.hasPrefix("Karo") {
+                if randomCardSide2.hasPrefix("Karo As") {
+                    pointOfDiamonds -= 2
+                }else {
+                    pointOfDiamonds -= 1
+                }
             }
+           
         }
-        whereIsTheCards()
+   
     }
     func controlSide3() {
-        if randomCardSide3.hasPrefix("Sinek") {
-            if randomCardSide3.hasPrefix("Sinek As") {
-                pointOfClub -= 2
-            }else {
-                pointOfClub -= 1
+        
+        if sideIsFaceUp3 {
+            if randomCardSide3.hasPrefix("Sinek") {
+                if randomCardSide3.hasPrefix("Sinek As") {
+                    pointOfClub -= 2
+                }else {
+                    pointOfClub -= 1
+                }
             }
-        }
-        if randomCardSide3.hasPrefix("Maça") {
-            if randomCardSide3.hasPrefix("Maça As") {
-                pointOfSpades -= 2
-            }else {
-                pointOfSpades -= 1
+            if randomCardSide3.hasPrefix("Maça") {
+                if randomCardSide3.hasPrefix("Maça As") {
+                    pointOfSpades -= 2
+                }else {
+                    pointOfSpades -= 1
+                }
             }
-        }
-        if randomCardSide3.hasPrefix("Kupa") {
-            if randomCardSide3.hasPrefix("Kupa As") {
-                pointOfHeart -= 2
-            }else {
-                pointOfHeart -= 1
+            if randomCardSide3.hasPrefix("Kupa") {
+                if randomCardSide3.hasPrefix("Kupa As") {
+                    pointOfHeart -= 2
+                }else {
+                    pointOfHeart -= 1
+                }
             }
-        }
-        if randomCardSide3.hasPrefix("Karo") {
-            if randomCardSide3.hasPrefix("Karo As") {
-                pointOfDiamonds -= 2
-            }else {
-                pointOfDiamonds -= 1
+            if randomCardSide3.hasPrefix("Karo") {
+                if randomCardSide3.hasPrefix("Karo As") {
+                    pointOfDiamonds -= 2
+                }else {
+                    pointOfDiamonds -= 1
+                }
             }
+         
         }
-        whereIsTheCards()
+        
+   
     }
     func controlSide4() {
-        if randomCardSide4.hasPrefix("Sinek") {
-            if randomCardSide4.hasPrefix("Sinek As") {
-                pointOfClub -= 2
-            }else {
-                pointOfClub -= 1
+        
+        if sideIsFaceUp4 {
+            if randomCardSide4.hasPrefix("Sinek") {
+                if randomCardSide4.hasPrefix("Sinek As") {
+                    pointOfClub -= 2
+                }else {
+                    pointOfClub -= 1
+                }
             }
-        }
-        if randomCardSide4.hasPrefix("Maça") {
-            if randomCardSide4.hasPrefix("Maça As") {
-                pointOfSpades -= 2
-            }else {
-                pointOfSpades -= 1
+            if randomCardSide4.hasPrefix("Maça") {
+                if randomCardSide4.hasPrefix("Maça As") {
+                    pointOfSpades -= 2
+                }else {
+                    pointOfSpades -= 1
+                }
             }
-        }
-        if randomCardSide4.hasPrefix("Kupa") {
-            if randomCardSide4.hasPrefix("Kupa As") {
-                pointOfHeart -= 2
-            }else {
-                pointOfHeart -= 1
+            if randomCardSide4.hasPrefix("Kupa") {
+                if randomCardSide4.hasPrefix("Kupa As") {
+                    pointOfHeart -= 2
+                }else {
+                    pointOfHeart -= 1
+                }
             }
-        }
-        if randomCardSide4.hasPrefix("Karo") {
-            if randomCardSide4.hasPrefix("Karo As") {
-                pointOfDiamonds -= 2
-            }else {
-                pointOfDiamonds -= 1
+            if randomCardSide4.hasPrefix("Karo") {
+                if randomCardSide4.hasPrefix("Karo As") {
+                    pointOfDiamonds -= 2
+                }else {
+                    pointOfDiamonds -= 1
+                }
             }
+          
         }
-        whereIsTheCards()
+        
+  
     }
     func controlSide5() {
-        if randomCardSide5.hasPrefix("Sinek") {
-            if randomCardSide5.hasPrefix("Sinek As") {
-                pointOfClub -= 2
-              
-            }else {
-                pointOfClub -= 1
+        
+        if sideIsFaceUp5 {
+            if randomCardSide5.hasPrefix("Sinek") {
+                if randomCardSide5.hasPrefix("Sinek As") {
+                    pointOfClub -= 2
+                  
+                }else {
+                    pointOfClub -= 1
+                }
             }
-        }
-        if randomCardSide5.hasPrefix("Maça") {
-            if randomCardSide5.hasPrefix("Maça As") {
-                pointOfSpades -= 2
-            }else {
-                pointOfSpades -= 1
+            if randomCardSide5.hasPrefix("Maça") {
+                if randomCardSide5.hasPrefix("Maça As") {
+                    pointOfSpades -= 2
+                }else {
+                    pointOfSpades -= 1
+                }
             }
-        }
-        if randomCardSide5.hasPrefix("Kupa") {
-            if randomCardSide5.hasPrefix("Kupa As") {
-                pointOfHeart -= 2
-            }else {
-                pointOfHeart -= 1
+            if randomCardSide5.hasPrefix("Kupa") {
+                if randomCardSide5.hasPrefix("Kupa As") {
+                    pointOfHeart -= 2
+                }else {
+                    pointOfHeart -= 1
+                }
             }
-        }
-        if randomCardSide5.hasPrefix("Karo") {
-            if randomCardSide5.hasPrefix("Karo As") {
-                pointOfDiamonds -= 2
-            }else {
-                pointOfDiamonds -= 1
+            if randomCardSide5.hasPrefix("Karo") {
+                if randomCardSide5.hasPrefix("Karo As") {
+                    pointOfDiamonds -= 2
+                }else {
+                    pointOfDiamonds -= 1
+                }
             }
+            
         }
-        whereIsTheCards()
+        
+   
     }
     func controlSide6() {
-        if randomCardSide6.hasPrefix("Sinek") {
-            if randomCardSide6.hasPrefix("Sinek As") {
-                pointOfClub -= 2
-            }else {
-               pointOfClub -= 1
+        
+        if sideIsFaceUp6 {
+            if randomCardSide6.hasPrefix("Sinek") {
+                if randomCardSide6.hasPrefix("Sinek As") {
+                    pointOfClub -= 2
+                }else {
+                   pointOfClub -= 1
+                }
             }
-        }
-        if randomCardSide6.hasPrefix("Maça") {
-            if randomCardSide6.hasPrefix("Maça As") {
-                pointOfSpades -= 2
-            }else {
-                pointOfSpades -= 1
+            if randomCardSide6.hasPrefix("Maça") {
+                if randomCardSide6.hasPrefix("Maça As") {
+                    pointOfSpades -= 2
+                }else {
+                    pointOfSpades -= 1
+                }
             }
-        }
-        if randomCardSide6.hasPrefix("Kupa") {
-            if randomCardSide6.hasPrefix("Kupa As") {
-                pointOfHeart -= 2
-            }else {
-                pointOfHeart -= 1
+            if randomCardSide6.hasPrefix("Kupa") {
+                if randomCardSide6.hasPrefix("Kupa As") {
+                    pointOfHeart -= 2
+                }else {
+                    pointOfHeart -= 1
+                }
             }
-        }
-        if randomCardSide6.hasPrefix("Karo") {
-            if randomCardSide6.hasPrefix("Karo As") {
-                pointOfDiamonds -= 2
-            }else {
-                pointOfDiamonds -= 1
+            if randomCardSide6.hasPrefix("Karo") {
+                if randomCardSide6.hasPrefix("Karo As") {
+                    pointOfDiamonds -= 2
+                }else {
+                    pointOfDiamonds -= 1
+                }
             }
+         
         }
-        whereIsTheCards()
+        
+      
     }
     
     
